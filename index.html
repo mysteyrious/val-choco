@@ -167,9 +167,9 @@
 
         .footer {
             text-align: center;
-            font-size: 10px; /* Adjust the size as needed */
+            font-size: 10px; 
             margin-top: 20px;
-            color: #18831c; /* Change to desired color */
+            color: #18831c;
         }
 
 
@@ -179,7 +179,7 @@
     <div class="card">
         <h1 class="title">˖౨ tey made this for u ৎ˚₊</h1>
         
-        <!-- Name Input Section -->
+        <!-- input nama sphh -->
         <div class="name-form" id="nameForm">
             <p class="welcome-text">p.s. sorry if it’s not what y’all expected, i made this code yesterday with 0 inspo and i was super rushed t﹏t 
             </p>
@@ -197,7 +197,7 @@
             </button>
         </div>
 
-        <!-- Game Section -->
+        <!-- Game-->
         <div class="game-section hidden" id="gameSection">
             <p class="welcome-text">hi <span id="playerName"></span>!</p>
             <button class="button" onclick="generateChocolates()">
@@ -252,21 +252,21 @@
             const count = document.getElementById('count');
             const playerName = document.getElementById('userName').value.trim();
             
-            // Clear previous chocolates
+            // clear prev choco
             chocolatesContainer.innerHTML = '';
             
-            // Generate random number of chocolates (1-10)
+            // nomor brp cokalt
             const chocolateCount = Math.floor(Math.random() * 10) + 1;
             
-            // Generate random message with player's name
+            // nama
             let randomMessage = messages[Math.floor(Math.random() * messages.length)];
             randomMessage = randomMessage.replace('NAMA', playerName);
             
-            // Update message and count
+            // count
             message.textContent = randomMessage;
             count.textContent = `yaayy!! u got ${chocolateCount} chocolate(s) <3`;
             
-            // Create chocolate elements
+            
             for (let i = 0; i < chocolateCount; i++) {
                 const chocolate = document.createElement('div');
                 chocolate.className = 'chocolate';
@@ -274,7 +274,7 @@
                 chocolatesContainer.appendChild(chocolate);
             }
             
-            // Show result
+            // hasil
             result.classList.add('show');
         }
         
