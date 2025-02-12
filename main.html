@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Chocolate Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Neue', cursive;
+        }
+
+        body {
+            background-color: #f2fdf2;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgb(255, 255, 255);
+            border-radius: 20px;
+            padding: 24px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            color: #cf6f9a;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+            font-family: 'Bubblegum Sans', cursive;
+            letter-spacing: 1px;
+        }
+
+        .welcome-text {
+            color: #da88ad;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #18831c;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #b5dbb5;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #18831c;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #18831c;
+        }
+
+        .button {
+            background: #da88ad;
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 50px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .button:disabled {
+            background: #eac6d3;
+            cursor: not-allowed;
+        }
+
+        .name-form, .game-section {
+            transition: opacity 0.3s;
+        }
+
+        .hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        .result {
+            margin-top: 24px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .result.show {
+            opacity: 1;
+        }
+
+        .message {
+            color: #18831c;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .chocolates {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .chocolate {
+            width: 40px;
+            height: 40px;
+            background: #eac6d300;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 0.5s;
+        }
+
+        .chocolate img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .count {
+            font-size: 20px;
+            font-weight: bold;
+            color: #18831c;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .heart-icon {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 10px; /* Adjust the size as needed */
+            margin-top: 20px;
+            color: #18831c; /* Change to desired color */
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1 class="title">˖౨ tey made this for u ৎ˚₊</h1>
+        
+        <!-- Name Input Section -->
+        <div class="name-form" id="nameForm">
+            <p class="welcome-text">p.s. sorry if it’s not what y’all expected, i made this code yesterday with 0 inspo and i was super rushed t﹏t 
+            </p>
+            <div class="input-group">
+                <label for="userName">write ur name:</label>
+                <input 
+                    type="text" 
+                    id="userName" 
+                    placeholder="yes, here :3"
+                    onkeyup="checkName()"
+                >
+            </div>
+            <button class="button" id="startButton" onclick="startGame()" disabled>
+                next
+            </button>
+        </div>
+
+        <!-- Game Section -->
+        <div class="game-section hidden" id="gameSection">
+            <p class="welcome-text">hi <span id="playerName"></span>!</p>
+            <button class="button" onclick="generateChocolates()">
+                <svg class="heart-icon" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                click to see the message!
+            </button>
+
+            <div class="result" id="result">
+                <p class="message" id="message"></p>
+                <div class="chocolates" id="chocolates"></div>
+                <p class="count" id="count"></p>
+
+            </div>
+        </div>
+        <br>
+        <p class="footer">@thequixothic</p>
+
+    </div>
+
+    <script>
+        const messages = [
+            "i'm so glad we found each other in this strange life! ✮ツ",
+            "i'm so grateful to have met such an amazing person such as yourself! ˆᵕˆ",
+            "you're a rare gem! never forget that okayy! (˵ •̀ ᴗ - ˵ ) ✧",
+            "you deserve all the love and happiness in the world! o( ˶^▾^˶ )o",
+            "i'm forever grateful our paths crossed! (*´▽`*) ",
+            "i hope you always know how cherished you are! ε(´｡•᎑•`)っ",
+            "your kindness and love make the world so much better! (..◜ᴗ◝..)"
+        ];
+
+        function checkName() {
+            const name = document.getElementById('userName').value.trim();
+            const startButton = document.getElementById('startButton');
+            startButton.disabled = name.length < 2;
+        }
+
+        function startGame() {
+            const name = document.getElementById('userName').value.trim();
+            if (name.length < 2) return;
+
+            document.getElementById('nameForm').classList.add('hidden');
+            document.getElementById('gameSection').classList.remove('hidden');
+            document.getElementById('playerName').textContent = name;
+        }
+
+        function generateChocolates() {
+            const result = document.getElementById('result');
+            const message = document.getElementById('message');
+            const chocolatesContainer = document.getElementById('chocolates');
+            const count = document.getElementById('count');
+            const playerName = document.getElementById('userName').value.trim();
+            
+            // Clear previous chocolates
+            chocolatesContainer.innerHTML = '';
+            
+            // Generate random number of chocolates (1-10)
+            const chocolateCount = Math.floor(Math.random() * 10) + 1;
+            
+            // Generate random message with player's name
+            let randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            randomMessage = randomMessage.replace('NAMA', playerName);
+            
+            // Update message and count
+            message.textContent = randomMessage;
+            count.textContent = `yaayy!! u got ${chocolateCount} chocolate(s) <3`;
+            
+            // Create chocolate elements
+            for (let i = 0; i < chocolateCount; i++) {
+                const chocolate = document.createElement('div');
+                chocolate.className = 'chocolate';
+                chocolate.innerHTML = '<img src="coklat.png" alt="coklat" style="width: 150%; height: 150%; object-fit: contain;">';
+                chocolatesContainer.appendChild(chocolate);
+            }
+            
+            // Show result
+            result.classList.add('show');
+        }
+        
+
+    </script>
+</body>
+</html>
