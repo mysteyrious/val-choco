@@ -20,6 +20,19 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card {
@@ -28,23 +41,34 @@
             padding: 24px;
             width: 100%;
             max-width: 350px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
         }
 
         .title {
             color: #cf6f9a;
             font-size: 24px;
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 8px;
             font-family: 'Bubblegum Sans', cursive;
             letter-spacing: 1px;
+        }
+
+        .gif-container {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .gif-container img {
+            max-width: 150px;
+            height: auto;
         }
 
         .welcome-text {
             color: #da88ad;
             font-size: 18px;
             text-align: center;
-            margin-bottom: 20px;
+            margin: 32px 0;  
+            padding: 10px 0;
         }
 
         .input-group {
@@ -77,7 +101,7 @@
             color: white;
             border: none;
             padding: 16px 24px;
-            border-radius: 50px;
+            border-radius: 12px;
             width: 100%;
             font-size: 16px;
             font-weight: bold;
@@ -87,6 +111,12 @@
             justify-content: center;
             gap: 8px;
             transition: transform 0.2s;
+            margin-top: 16px;
+        }
+
+        button:hover {
+            background-color: #bb7594; 
+            transform: scale(1.015); 
         }
 
         .button:active {
@@ -171,17 +201,18 @@
             margin-top: 20px;
             color: #18831c;
         }
-
-
     </style>
 </head>
 <body>
     <div class="card">
         <h1 class="title">˖౨ tey made this for u ৎ˚₊</h1>
+        <div class="gif-container">
+            <img src="morol.gif" alt="Morol Gif">
+        </div>
         
         <!-- input nama sphh -->
         <div class="name-form" id="nameForm">
-            <p class="welcome-text">p.s. sorry if it’s not what y’all expected, i made this code with 0 inspo and i was super rushed t﹏t 
+            <p class="welcome-text">p.s. sorry if it's not what y'all expected, i made this code with 0 inspo and i was super rushed t﹏t 
             </p>
             <div class="input-group">
                 <label for="userName">write ur name:</label>
@@ -197,9 +228,9 @@
             </button>
         </div>
 
-        <!-- Game-->
+        
         <div class="game-section hidden" id="gameSection">
-            <p class="welcome-text">hi <span id="playerName"></span>!</p>
+            <p class="welcome-text">hii i hope ur day is amazing as u are! :3 i have a lil messsage for u, <span id="pName"></span>!</p>
             <button class="button" onclick="generateChocolates()">
                 <svg class="heart-icon" viewBox="0 0 24 24">
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -211,24 +242,22 @@
                 <p class="message" id="message"></p>
                 <div class="chocolates" id="chocolates"></div>
                 <p class="count" id="count"></p>
-
             </div>
         </div>
         <br>
         <p class="footer">@thequixothic</p>
-
     </div>
 
     <script>
-        const messages = [
-            "i'm so glad we found each other in this strange life! ✮ツ",
-            "i'm so grateful to have met such an amazing person such as yourself! ˆᵕˆ",
-            "you're a rare gem! never forget that okayy! (˵ •̀ ᴗ - ˵ ) ✧",
-            "you deserve all the love and happiness in the world! o( ˶^▾^˶ )o",
-            "i'm forever grateful our paths crossed! (*´▽`*) ",
-            "i hope you always know how cherished you are! ε(´｡•᎑•`)っ",
-            "your kindness and love make the world so much better! (..◜ᴗ◝..)"
-        ];
+    const messages = [
+        "im so unbelievably happy that somehow, in this big, chaotic world, we managed to find each other! it feels like the universe really wanted this to happen! ✮ツ",
+        "youre seriously one of the coolest people ever!! so happy we get to be friends! stay healthyy pls?? and i hope happiness surround u always!! o( ˶^▾^˶ )o",
+        "just wanted to remind u that youre pretty awesome, ok? dont let anyone tell u different! youre a whole treasure chest full of good vibes! (˵ •̀ ᴗ - ˵ ) ✧",
+        "u deserve all the love, joy, and good things that life has to offer! and if i could, id send you a never-ending supply of happiness right now! ˆᵕˆ",
+        "i really hope u always know deep down just how loved and appreciated u are, because the world wouldn’t be the same without u! ε(´｡•᎑•`)っ",
+        "u know what? u just make everything better by being urself, and i hope u know how much brighter you make the world (..◜ᴗ◝..)"
+    ];
+
 
         function checkName() {
             const name = document.getElementById('userName').value.trim();
@@ -241,8 +270,9 @@
             if (name.length < 2) return;
 
             document.getElementById('nameForm').classList.add('hidden');
+            document.querySelector('.gif-container').style.display = 'none';
             document.getElementById('gameSection').classList.remove('hidden');
-            document.getElementById('playerName').textContent = name;
+            document.getElementById('pName').textContent = name;
         }
 
         function generateChocolates() {
@@ -250,22 +280,19 @@
             const message = document.getElementById('message');
             const chocolatesContainer = document.getElementById('chocolates');
             const count = document.getElementById('count');
-            const playerName = document.getElementById('userName').value.trim();
+            const pName = document.getElementById('userName').value.trim();
             
-            // clear prev choco
+           
+            document.querySelector('#gameSection .welcome-text').style.display = 'none';
+            
             chocolatesContainer.innerHTML = '';
-            
-            // nomor brp cokalt
             const chocolateCount = Math.floor(Math.random() * 10) + 1;
             
-            // nama
             let randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            randomMessage = randomMessage.replace('NAMA', playerName);
+            randomMessage = randomMessage.replace('NAMA', pName);
             
-            // count
             message.textContent = randomMessage;
             count.textContent = `yaayy!! u got ${chocolateCount} chocolate(s) <3`;
-            
             
             for (let i = 0; i < chocolateCount; i++) {
                 const chocolate = document.createElement('div');
@@ -274,11 +301,8 @@
                 chocolatesContainer.appendChild(chocolate);
             }
             
-            // hasil
             result.classList.add('show');
         }
-        
-
     </script>
 </body>
 </html>
